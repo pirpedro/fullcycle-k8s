@@ -1,0 +1,14 @@
+steps:
+  - id: "Installing dependencies"
+    name: "gcr.io/cloud-builders/go"
+    dir: "desafio-go"
+    args: ['install', 'hello']
+    env:
+      - GOPATH=.
+
+  - id: "Running tests"
+    name: "gcr.io/cloud-builders/go"
+    dir: "desafio-go"
+    args: ['test', 'hello']
+    env:
+      - GOPATH=.

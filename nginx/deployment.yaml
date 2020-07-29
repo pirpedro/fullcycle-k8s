@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-nginx
+  template:
+    metadata:
+      labels:
+        app: my-nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.17.4-alpine
+        volumeMounts:
+          - mountPath: /usr/share/nginx/html
+            name: welcome-page
+        ports:
+        - containerPort: 80
+      volumes:
+        - name: welcome-page
+          configMap:
+            name: welcome-page-config
+            items: 
+              - key: index.html
+                path: index.html
+             
